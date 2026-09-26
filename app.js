@@ -1,5 +1,5 @@
 // app.js：渲染结果
-import { plan } from "./keys.js";
+import { plan, apply } from "./keys.js";
 import { applyRequests } from "./apply.js";
 
 export function render(spec) {
@@ -9,12 +9,7 @@ export function render(spec) {
   const fullOps = [];
   for (const request of requests) {
     for (const op of plan(full, request.after)) {
-      full = (function (list, step) {
-        if (step[0] === "remove") return list.filter(function (key) { return key !== step[1]; });
-        if (step[0] === "insert") return list.slice(0, step[2]).concat([step[1]]).concat(list.slice(step[2]));
-        return list.filter(function (key) { return key !== step[1]; }).slice(0, step[2])
-          .concat([step[1]]).concat(list.filter(function (key) { return key !== step[1]; }).slice(step[2]));
-      })(full, op);
+      full = apply(full, op);
       fullOps.push(op);
     }
   }
