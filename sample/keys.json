@@ -1,0 +1,11 @@
+{
+  "bad_key_code": "E_DUP_KEY",
+  "budget": 3,
+  "before": ["a", "b", "c", "d", "e"],
+  "applied": ["k1"],
+  "requests": [
+    {"edit_id": "k1", "after": ["c", "a", "x", "e", "b"]},
+    {"edit_id": "k2", "after": ["x", "b", "d"]},
+    {"edit_id": "k3", "after": ["x", "b", "d", "y"]}
+  ]
+}
